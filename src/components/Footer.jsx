@@ -1,10 +1,13 @@
 import React from 'react';
-// import { Stethoscope, Twitter, Linkedin, ArrowUp, Globe } from 'lucide-react';
-
+import { Link } from 'react-router-dom';
+import { Stethoscope, ArrowUp, Globe, Cookie } from 'lucide-react';
+import { FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { openCookieSettings } from './CookieConsent';
 const footerLinks = {
   product: [
     { name: 'Features', href: '#features' },
     { name: 'Pricing', href: '#pricing' },
+    { name: 'ABHA Card', href: '/abha' },
     { name: 'Security', href: '#' },
     { name: 'Integrations', href: '#' },
     { name: 'Changelog', href: '#' },
@@ -24,18 +27,18 @@ const footerLinks = {
     { name: 'Community', href: '#' },
   ],
   legal: [
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
-    { name: 'Cookie Policy', href: '#' },
+    { name: 'Privacy Policy', href: '/privacy-policy' },
+    { name: 'Terms of Service', href: '/terms-of-service' },
+    { name: 'Cookie Policy', href: '/cookie-policy' },
+    { name: 'GDPR Policy', href: '/gdpr-policy' },
     { name: 'HIPAA Compliance', href: '#' },
   ],
 };
 
 const socialLinks = [
-  // { icon: Twitter, href: '#', label: 'Twitter' },
-  // { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  // { icon: Globe, href: '#', label: 'Website' },
-  // { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: FaTwitter, href: '#', label: 'Twitter' },
+  { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
+  { icon: FaInstagram, href: '#', label: 'Instagram' },
 ];
 
 const Footer = () => {
@@ -51,12 +54,9 @@ const Footer = () => {
           <div className="grid lg:grid-cols-6 gap-12">
             {/* Brand Column */}
             <div className="lg:col-span-2">
-              <a href="#home" className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-teal-500 flex items-center justify-center">
-                  {/* <Stethoscope className="w-5 h-5 text-white" /> */}
-                </div>
-                <span className="text-xl font-bold">MediWeGo</span>
-              </a>
+              <Link to="/" className="flex items-center my-2 gap-2 mb-4">
+                <img src="./logo.png" alt="MediWeGo" className="w-60 h-15" />
+              </Link>
               <p className="text-gray-400 mb-6 max-w-sm">
                 Modern healthcare management software for clinics, hospitals, and healthcare providers across India.
               </p>
@@ -72,7 +72,7 @@ const Footer = () => {
                       aria-label={social.label}
                       className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary-600 transition-colors"
                     >
-                      {/* <Icon className="w-5 h-5" /> */}
+                      <Icon className="w-5 h-5" />
                     </a>
                   );
                 })}
@@ -85,9 +85,15 @@ const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.product.map((link) => (
                   <li key={link.name}>
-                    <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
-                      {link.name}
-                    </a>
+                    {link.href.startsWith('/') ? (
+                      <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -98,9 +104,15 @@ const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
-                      {link.name}
-                    </a>
+                    {link.href.startsWith('/') ? (
+                      <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -111,9 +123,15 @@ const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.support.map((link) => (
                   <li key={link.name}>
-                    <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
-                      {link.name}
-                    </a>
+                    {link.href.startsWith('/') ? (
+                      <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -124,9 +142,15 @@ const Footer = () => {
               <ul className="space-y-3">
                 {footerLinks.legal.map((link) => (
                   <li key={link.name}>
-                    <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
-                      {link.name}
-                    </a>
+                    {link.href.startsWith('/') ? (
+                      <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -144,12 +168,21 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-4 text-sm text-gray-400">
               <span>Made with care for healthcare professionals</span>
+              <span className="hidden sm:inline text-gray-600">|</span>
+              <button
+                onClick={openCookieSettings}
+                className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
+                aria-label="Manage cookie preferences"
+              >
+                <Cookie className="w-4 h-4" />
+                Manage Cookies
+              </button>
               <button
                 onClick={scrollToTop}
                 className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary-600 transition-colors"
                 aria-label="Scroll to top"
               >
-                {/* <ArrowUp className="w-5 h-5" /> */}
+                <ArrowUp className="w-5 h-5" />
               </button>
             </div>
           </div>

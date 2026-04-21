@@ -105,7 +105,9 @@ const Benefits = () => {
               Ready to transform your healthcare practice?
             </p>
             <a
-              href="#demo"
+              href="https://apps.mediwego.com/App/register"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-xl hover:bg-gray-100 transition-colors"
             >
               Start Your Free Trial

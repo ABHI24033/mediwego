@@ -34,7 +34,7 @@ const FloatingCTA = () => {
         </div>
         
         <a
-          href="#contact"
+          href="/book-demo"
           className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 rounded-xl text-sm font-semibold transition-colors whitespace-nowrap"
         >
           <Calendar className="w-4 h-4" />

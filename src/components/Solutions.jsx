@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Stethoscope, Building2, Pill, UserCircle, ArrowRight } from 'lucide-react';
 
 const solutions = [
@@ -9,6 +10,7 @@ const solutions = [
     image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=400&fit=crop',
     features: ['Appointment Scheduling', 'Digital Prescriptions', 'Patient Records', 'Billing Management'],
     color: 'from-blue-500 to-blue-600',
+    path: '/solutions/doctors-clinics',
   },
   {
     icon: Building2,
@@ -17,6 +19,7 @@ const solutions = [
     image: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600&h=400&fit=crop',
     features: ['Multi-department Management', 'EMR Integration', 'Staff Management', 'Advanced Analytics'],
     color: 'from-teal-500 to-teal-600',
+    path: '/solutions/hospitals',
   },
   {
     icon: Pill,
@@ -25,6 +28,7 @@ const solutions = [
     image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&h=400&fit=crop',
     features: ['Digital Prescriptions', 'Inventory Management', 'Order Tracking', 'Provider Network'],
     color: 'from-purple-500 to-purple-600',
+    path: '/solutions/pharma',
   },
   {
     icon: UserCircle,
@@ -33,6 +37,7 @@ const solutions = [
     image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop',
     features: ['Easy Booking', 'Digital Records', 'Medicine Reminders', 'Teleconsultation'],
     color: 'from-green-500 to-green-600',
+    path: '/solutions/patients',
   },
 ];
 
@@ -100,10 +105,13 @@ const Solutions = () => {
                       ))}
                     </div>
 
-                    <button className="flex items-center gap-2 text-primary-600 font-semibold group-hover:gap-3 transition-all">
+                    <Link 
+                      to={solution.path}
+                      className="flex items-center gap-2 text-primary-600 font-semibold group-hover:gap-3 transition-all"
+                    >
                       Learn more
                       <ArrowRight className="w-4 h-4" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               );

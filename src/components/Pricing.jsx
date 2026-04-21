@@ -96,7 +96,7 @@ const Pricing = () => {
           </div>
 
           {/* Billing Toggle */}
-          <div className="flex items-center justify-center gap-4 mb-12">
+          {/* <div className="flex items-center justify-center gap-4 mb-12">
             <span className={`text-sm font-medium ${!isYearly ? 'text-gray-900' : 'text-gray-500'}`}>
               Monthly
             </span>
@@ -114,7 +114,7 @@ const Pricing = () => {
               Yearly
               <span className="ml-1.5 text-xs text-green-600 font-semibold">Save 20%</span>
             </span>
-          </div>
+          </div> */}
 
           {/* Pricing Cards */}
           <div className="grid md:grid-cols-3 gap-8">
@@ -164,15 +164,18 @@ const Pricing = () => {
                   </div>
 
                   {/* CTA Button */}
-                  <button
-                    className={`w-full py-3 rounded-xl font-semibold transition-all ${
+                  <a
+                    href={plan.cta === 'Contact Sales' ? '#contact' : 'https://apps.mediwego.com/App/register'}
+                    target={plan.cta === 'Contact Sales' ? '_self' : '_blank'}
+                    rel={plan.cta === 'Contact Sales' ? '' : 'noopener noreferrer'}
+                    className={`block w-full text-center py-3 rounded-xl font-semibold transition-all ${
                       plan.popular
                         ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg shadow-primary-600/25'
                         : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                     }`}
                   >
                     {plan.cta}
-                  </button>
+                  </a>
 
                   {/* Features List */}
                   <div className="mt-8 space-y-4">

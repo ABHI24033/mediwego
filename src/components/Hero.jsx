@@ -9,7 +9,7 @@ const Hero = () => {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen pt-20 overflow-hidden">
+    <section id="home" className="relative min-h-screen pt-10 overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-teal-50" />
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-primary-100/50 to-transparent rounded-full blur-3xl" />
@@ -42,11 +42,16 @@ const Hero = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#demo" className="btn-primary text-lg px-8 py-4">
+                <a href="/book-demo" className="btn-primary text-lg px-8 py-4">
                   Book Demo
                   <ArrowRight className="w-5 h-5" />
                 </a>
-                <a href="#trial" className="btn-secondary text-lg px-8 py-4">
+                <a 
+                  href="https://apps.mediwego.com/App/register" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-lg px-8 py-4"
+                >
                   Start Free Trial
                 </a>
               </div>

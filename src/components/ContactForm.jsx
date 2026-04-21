@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Send, Phone, Mail, MapPin, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Send, Phone, Mail, MapPin, CheckCircle, Loader2 } from 'lucide-react';
+import { sendContactFormEmail } from '../services/zeptoMail';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,15 +12,28 @@ const ContactForm = () => {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', clinicName: '', phone: '', email: '', message: '' });
-    }, 3000);
+    setIsSubmitting(true);
+    setSubmitError(null);
+    
+    try {
+      await sendContactFormEmail(formData);
+      setIsSubmitted(true);
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: '', clinicName: '', phone: '', email: '', message: '' });
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      setSubmitError('Failed to send message. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -50,7 +65,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Phone</p>
-                    <p className="text-gray-600">+91 22 1234 5678</p>
+                    <p className="text-gray-600">+91 9067067617</p>
                     <p className="text-sm text-gray-500">Mon-Sat, 9am-6pm IST</p>
                   </div>
                 </div>
@@ -71,10 +86,10 @@ const ContactForm = () => {
                     <MapPin className="w-5 h-5 text-primary-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Office</p>
+                    <p className="font-semibold text-gray-900">Address</p>
                     <p className="text-gray-600">
-                      123 Healthcare Avenue, Bandra West<br />
-                      Mumbai, Maharashtra 400050
+                      #5, Neealdri Road , Electronic City Phase1 <br />
+                      Bangalore , Karnataka , 560100
                     </p>
                   </div>
                 </div>
@@ -179,23 +194,39 @@ const ContactForm = () => {
                     />
                   </div>
 
+                  {submitError && (
+                    <div className="p-3 bg-red-50 text-red-700 rounded-lg text-sm">
+                      {submitError}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full py-4 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    <Send className="w-5 h-5" />
-                    Schedule Demo
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        Schedule Demo
+                      </>
+                    )}
                   </button>
 
                   <p className="text-center text-sm text-gray-500">
                     By submitting this form, you agree to our{' '}
-                    <a href="#" className="text-primary-600 hover:underline">
+                    <Link to="/terms-of-service" className="text-primary-600 hover:underline">
                       Terms of Service
-                    </a>{' '}
+                    </Link>{' '}
                     and{' '}
-                    <a href="#" className="text-primary-600 hover:underline">
+                    <Link to="/privacy-policy" className="text-primary-600 hover:underline">
                       Privacy Policy
-                    </a>
+                    </Link>
                   </p>
                 </form>
               )}
